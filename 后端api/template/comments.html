@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+</head>
+
+<body>
+
+    <h1>博客详情</h1>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix" style="margin-top:2vw;">
+                    <!-- 左侧评论展示 -->
+                    <div class="col-md-8 column">
+                        <div class="row" id="insert">
+
+                        </div>
+
+                    </div>
+                    <!-- 右侧登陆部分 -->
+                    <div class="col-md-4 column">
+                        <div class="row clearfix">
+                            <div class="col-md-12 column">
+                                <form class="bs-example bs-example-form" role="form">
+                                    <h3>添加评论区域</h3>
+                                    <hr>
+
+                                    <div class="form-group">
+                                        <!-- <label for="name">作者</label> -->
+                                        <input type="hidden" class="form-control" id="comment-blog-id" value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">作者</label>
+                                        <input type="text" class="form-control" id="comment-author" placeholder="一个人名">
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label for="name">内容</label>
+                                        <textarea class="form-control" rows="3" id="comment-content"></textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-info" id="newComment">提交</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var ajax = function (request) {
+            /*
+            request 是一个 object, 有如下属性
+                method, 请求的方法, string
+                url, 请求的路径, string
+                data, 请求发送的数据, 如果是 GET 方法则没这个值, string
+                callback, 响应回调, function
+            */
+            var r = new XMLHttpRequest()
+            r.open(request.method, request.url, true)
+            if (request.contentType !== undefined) {
+                r.setRequestHeader('Content-Type', request.contentType)
+            }
+            r.onreadystatechange = function (event) {
+                if (r.readyState === 4) {
+                    request.callback(r.response)
+                }
+            }
+            if (request.method === 'GET') {
+                r.send()
+            } else {
+                r.send(request.data)
+            }
+        }
+
+        var blogAll = function () {
+            var request = {
+                method: 'GET',
+                url: '/api/blog/all',
+                contentType: 'application/json',
+                callback: function (response) {
+                    console.log('响应', response)
+                    var res = JSON.parse(response)
+                    if (res.success) {
+                        // window.location.href = '/'
+                    } else {
+                        // alert('登录失败')
+                    }
+                }
+            }
+            ajax(request)
+        }
+
+        var blogNew = function () {
+            var form = {
+                title: "测试标题",
+                author: "gua",
+                content: "测试内容",
+            }
+            var data = JSON.stringify(form)
+            var request = {
+                method: 'POST',
+                url: '/api/blog/add',
+                data: data,
+                contentType: 'application/json',
+                callback: function (response) {
+                    console.log('响应', response)
+                    var res = JSON.parse(response)
+                    if (res.success) {
+                        // window.location.href = '/'
+                    } else {
+                        // alert('登录失败')
+                    }
+                }
+            }
+            ajax(request)
+        }
+    </script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script> -->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
