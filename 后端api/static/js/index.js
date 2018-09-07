@@ -90,6 +90,8 @@ var insertBlogDetail = function (data) {
     var d = blogDetailTemplate(data)
     // window.open('/detail.html', "_blank")
     e('#insert').innerHTML = d
+    // 删除轮播部分
+    e('#lb').innerHTML = `<h1>博客详情</h1>`
 }
 
 var commentsTemplate = function (comment) {
@@ -268,7 +270,10 @@ var bindEvents = function () {
         if (target.classList.contains('blog-title')) {
             var id = target.dataset.id
             var data = window.blog[id - 1]
-            // 此处需要查询api
+          
+            // // 直接改地址方法
+            // window.location.pathname = '/comments'
+            
             // 直接插入dom的方法
             console.log('detail', data)
             var detail = {
@@ -279,6 +284,7 @@ var bindEvents = function () {
                 imgUrl: data.imgUrl
             }
             console.log('detail', detail)
+            
             insertBlogDetail(detail)
 
             // console.log('a', id, data)

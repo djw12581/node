@@ -34,53 +34,8 @@ app.get('/comments', function (request, response) {
 })
 
 
-// 添加api
-var todoAdd = function (todo) {
-    // 给传入的数据添加 id
-    var t = todos[todos.length - 1]
-    if (t == undefined) {
-        todo.id = 1
-    } else {
-        todo.id = t.id + 1
-    }
-    // 把 todo 添加到 todos
-    todos.push(todo)
-    // 把todos保存到文件中
-    writeTodosToFile(todos)
-    return todo
-}
+// 连接数据库 api
 
-// 删除api
-var todoDelete = function (todo) {
-    // 遍历todos 找出task相等的项 i 是下表
-    var k = Object.keys(todo)[0]
-    console.log(todo.task)
-    for (let i = 0; i < todos.length; i++) {
-        const element = todos[i];
-        if (element[k] == todo[k]) {
-            todos.splice(i, 1)
-        }
-    }
-    writeTodosToFile(todos)
-    return todos
-}
-
-// 更新api
-var todoUpdate = function (todo) {
-    // 遍历todos 找出task相等的项 
-    var k = Object.keys(todo)[0]
-    console.log('循环外', k, todo[k])
-    for (let i = 0; i < todos.length; i++) {
-        var element = todos[i];
-        if (element[k] !== undefined) {
-            element[k] = todo[k]
-        }
-        console.log('循环内', i, element[k], todo[k])
-
-    }
-    writeTodosToFile(todos)
-    return todos
-}
 
 app.get('/api/blog/all', function (request, response) {
     
@@ -129,6 +84,53 @@ app.post('/todo/update', function (request, response) {
     response.send(r)
 })
 
+// 添加api
+var todoAdd = function (todo) {
+    // 给传入的数据添加 id
+    var t = todos[todos.length - 1]
+    if (t == undefined) {
+        todo.id = 1
+    } else {
+        todo.id = t.id + 1
+    }
+    // 把 todo 添加到 todos
+    todos.push(todo)
+    // 把todos保存到文件中
+    writeTodosToFile(todos)
+    return todo
+}
+
+// 删除api
+var todoDelete = function (todo) {
+    // 遍历todos 找出task相等的项 i 是下表
+    var k = Object.keys(todo)[0]
+    console.log(todo.task)
+    for (let i = 0; i < todos.length; i++) {
+        const element = todos[i];
+        if (element[k] == todo[k]) {
+            todos.splice(i, 1)
+        }
+    }
+    writeTodosToFile(todos)
+    return todos
+}
+
+// 更新api
+var todoUpdate = function (todo) {
+    // 遍历todos 找出task相等的项 
+    var k = Object.keys(todo)[0]
+    console.log('循环外', k, todo[k])
+    for (let i = 0; i < todos.length; i++) {
+        var element = todos[i];
+        if (element[k] !== undefined) {
+            element[k] = todo[k]
+        }
+        console.log('循环内', i, element[k], todo[k])
+
+    }
+    writeTodosToFile(todos)
+    return todos
+}
 // 开启本地服务器
 var server = app.listen(8081, function () {
     var host = server.address().address
