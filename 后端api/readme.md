@@ -4,3 +4,5 @@
 -   重写detail api 使用ajax 而不是替换
 -   新加writeFIle api 从数据库拿数据 写入文件
 
+1.  使用 fetch 替换 ajax
+2.  修改 详情页

@@ -32,7 +32,7 @@ var ajax = function (request) {
 // 生成随即图片链接
 var random = function () {
     var i = Math.floor(Math.random() * 964)
-    var url = 'http://7xr4g8.com1.z0.glb.clouddn.com/' + i
+    var url = 'https://picsum.photos/300/200/?image=' + i    
     return url
 }
 
@@ -63,7 +63,7 @@ var blogDetailTemplate = function (detail) {
         `
         <div class="">
         <div class="thumbnail">
-            <img alt="300x200" src=${imgUrl} />
+            <img alt="300x200" src=${imgUrl} class="img-fluid"/>
             <div class="caption blog">
                 <a  href="#" >
                 <h3 class="blog-title" data-id="${id}">
@@ -108,7 +108,7 @@ var commentsTemplate = function (comment) {
         `
                 <div class="">
                     <div class="thumbnail">
-                    <img alt="300x200" src=${imgUrl} />
+                    <img alt="300x200" src=${imgUrl} style="width:100%;max-width:100%;height:100px;"/>
                         <div class="caption blog">
                         <input type="hidden" class="form-control" id="comment-blog-id" value="${id}">
                             <div class="">
@@ -150,18 +150,17 @@ var blogNew = function (data) {
     }
 
     var data = JSON.stringify(form)
-    var request = {
+    fetch('/api/blog/add', {
         method: 'POST',
-        url: '/api/blog/add',
-        data: data,
-        contentType: 'application/json',
-        callback: function (response) {
-            console.log('响应', response)
-            // var res = JSON.parse(response)
-
-        }
-    }
-    ajax(request)
+        headers: new Headers({
+            'Content-Type': 'application/json' // 指定提交方式为表单提交
+        }),
+        body: data,
+    }).then(res => {
+        return res.text()
+    }).then(res => {
+        
+    })
 }
 
 var insertBlogAll = function (blogs) {
@@ -215,21 +214,27 @@ var blogTemplate = function (blog) {
 
 // 发送ajax请求 在回调函数中调用插入数据的
 var blogAll = function () {
-    var request = {
+    // 发送 get 请求 ‘/api/blog/all’
+    // 在回调函数中缓存 blog 数据，调用 insertBlogAll 函数
+    fetch('/api/blog/all', {
         method: 'GET',
-        url: '/api/blog/all',
-        contentType: 'application/json',
-        callback: function (response) {
-            // 不考虑错误情况(断网/服务器返回错误等等)
-            console.log('响应', response)
-            var blogs = JSON.parse(response)
+        headers: new Headers({
+        'Content-Type': 'application/json' // 指定提交方式为表单提交
+        }),
+    // body: new URLSearchParams([["foo", 1],["bar", 2]]).toString()
+    })
+    .then((res)=>{
+        console.log('响应 promise', res)
+        return res.text()
+    })
+    .then((res)=>{
+        console.log('响应 text', res)
+        var blogs = JSON.parse(res)
             // 数据放入window
             window.blog = blogs
             // 插入数据的函数
             insertBlogAll(blogs)
-        }
-    }
-    ajax(request)
+    })
 }
 
 var bindEvents = function () {
@@ -248,7 +253,7 @@ var bindEvents = function () {
     button.addEventListener('click', function (event) {
         // console.log('click new')
         // 得到用户填写的数据
-        // 随即图片api http://7xr4g8.com1.z0.glb.clouddn.com/671
+       
         var imgSrc = random()
         // console.log(random())
         var form = {
@@ -295,46 +300,45 @@ var bindEvents = function () {
                 var data = window.blog[id - 1]
                 var comments = data.comments
                 var html = JSON.stringify(comments)
-                // 发送ajax 传递comments数据
-                ajax({
+                fetch('/comments', {
                     method: 'GET',
-                    url: '/comments',
-                    contentType: 'application/json',
-                    callback: function (response) {
-                        // console.log('comments', response)
-                        // var res = JSON.parse(response)
-                        // console.log('comments', response, comments)
-                        // 替换页面内容 保证window数据不丢失
-                        e('html').innerHTML = response
-                        // window.location.pathname = 'comments'
-                        // 插入数据
-                        insertCommentsAll(html)
-                        // comment提交事件
-                        e('#newComment').addEventListener('click', function (event) {
-                            var imgSrc = random()
-                            var form = {
-                                author: e('#comment-author').value,
-                                content: e('#comment-content').value,
-                                blog_id: id,
-                                imgUrl: imgSrc
-                                // mima: e('#id-input-mima').value,
-                            }
+                    headers: new Headers({
+                        'Content-Type': 'application/json'
+                        }),
+                }).then(res => {
+                    return res.text()
+                }).then(res => {
+                    // console.log('相应', res)
+                    // 替换页面内容 保证window数据不丢失
+                    e('html').innerHTML = res
+                    // window.location.pathname = 'comments'
+                    // 插入数据
+                    insertCommentsAll(html)
+                    // comment提交事件
+                    e('#newComment').addEventListener('click', function (event) {
+                        var imgSrc = random()
+                        var form = {
+                            author: e('#comment-author').value,
+                            content: e('#comment-content').value,
+                            blog_id: id,
+                            imgUrl: imgSrc
+                            // mima: e('#id-input-mima').value,
+                        }
 
-                            var data = JSON.stringify(form)
-                            var request = {
-                                method: 'POST',
-                                url: '/api/comment/add',
-                                data: data,
-                                contentType: 'application/json',
-                                callback: function (response) {
-
-                                }
-                            }
-                            ajax(request)
-                        })
-                    }
+                        var data = JSON.stringify(form)
+                        fetch('/api/comment/add', {
+                            method: 'POST',
+                            headers: new Headers({
+                                'Content-Type': 'application/json'
+                            }),
+                            body: data,
+                        }).then(res => {
+                            return res.text()
+                        }).then(res => {
+                            console.log('评论提交ok')
+                        }) 
+                    })
                 })
-
             }
 
     })
@@ -349,24 +353,3 @@ var __main = function () {
 }
 
 __main()
-
-
-// 定义ajax函数
-// var ajax = function (method, path, data, reseponseCallback) {
-//     var r = new XMLHttpRequest()
-//     // 设置请求方法和请求地址
-//     r.open(method, path, true)
-//     // 设置发送的数据的格式
-//     r.setRequestHeader('Content-Type', 'application/json')
-//     // 注册响应函数
-//     r.onreadystatechange = function () {
-//         if (r.readyState === 4) {
-//             reseponseCallback(r)
-//         }
-//     }
-//     // 发送请求
-//     r.send(data)
-// }
-// ajax('GET', 'api/todo/all', '', function (r) {
-//     console.log(r)
-// })
