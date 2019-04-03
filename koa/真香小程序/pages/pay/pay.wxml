@@ -1,0 +1,32 @@
+<!--pay.wxml-->
+<view class="container">
+    <!-- 顶部导航栏 -->
+    <van-nav-bar title="标题" left-text="返回" right-text="按钮" left-arrow bind:click-left="onClickLeft"
+        bind:click-right="onClickRight" />
+    <!-- 添加的列表 -->
+    <view wx:for="{{recive}}" wx:key="{{index}}">
+        <van-card custom-class="p-y" num="{{item.num}}" tag="{{item.tag}}" price="{{item.price}}" origin-price="{{item.originPrice||''}}"
+            desc="{{item.desc}}" title="{{item.title}}" thumb="{{ body.dataList.imageURL }}" lazy-load="true"
+            centered="true">
+            <view slot="footer">
+                <van-icon id="{{index}}" name="add-o" size="2em" bind:click="onAddFood" data-title="{{item.title}}" />
+                <van-icon id="{{index}}" name="close" size="2em" bind:click="onDeleteFood"
+                    data-title="{{item.title}}" />
+            </view>
+        </van-card>
+    </view>
+    <!-- 底部支付部分 -->
+    <van-submit-bar price="{{ price||0000 }}" button-text="提交订单" tip="{{ true }}" bind:submit="onClickButton">
+        <van-radio name="{{true}}" id="radio" value="{{radio}}" bind:change="onClickRadio">
+            全选
+        </van-radio>
+
+        <view slot="tip">
+            您的餐号是12138 <text>请耐心等待~</text>
+        </view>
+    </van-submit-bar>
+
+
+
+
+</view>

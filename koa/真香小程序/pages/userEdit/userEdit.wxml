@@ -1,0 +1,12 @@
+<view class="container position_p">
+    <label class="pb1" for="userData">
+        意见或建议：
+    </label>
+    <textarea class="pb1" name="" id="userData"  bindinput="bindinput" placeholder="请在此处留下您的宝贵建议~">
+
+    </textarea>
+    
+    <van-rate  value="{{ value }}" bind:change="onChange" />
+    <van-dialog id="van-dialog" />
+    <van-button plain type="primary" custom-class="pb1" size="small" bind:click="userInput">提交</van-button>
+</view>

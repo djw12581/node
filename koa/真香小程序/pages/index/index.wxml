@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 顶部搜索 -->
+  <van-search value="{{ header.searchValue }}" placeholder="请输入搜索关键词" bind:search="onSearch" />
+  <!-- 宫格上方通告栏 -->
+  <van-notice-bar left-icon="https://img.yzcdn.cn/1.png" text="酸辣面asdfasdfasdfasdfasdfasdfsadfasdf000份！真香！！" />
+  <!-- 中间宫格部分 -->
+
+  <!-- 轮播特价食物 -->
+  <!-- main 部分 -->
+  <view class="position_p_b" hover-class="none" hover-stop-propagation="false">
+    <!-- 数据列表部分 -->
+    <view wx:for="{{getData}}" wx:key="{{index}}">
+      <van-card custom-class="p-y" num="{{item.num}}" tag="{{item.tag}}" price="{{item.price}}" origin-price="{{item.originPrice||''}}"
+        desc="{{item.desc}}" title="{{item.title}}" thumb="{{ body.dataList.imageURL }}" lazy-load="true"
+        centered="true">
+        <view slot="footer">
+          <van-icon id="{{index}}" name="add-o" size="2em" bind:click="onAddFood" data-title="{{item.title}}" />
+          <van-icon id="{{index}}" name="close" size="2em" bind:click="onDeleteFood" data-title="{{item.title}}" />
+        </view>
+      </van-card>
+    </view>
+  </view>
+
+
+
+
+  <!-- 底部导航 -->
+  <van-tabbar active="{{ footer.navbar.active }}" bind:change="onChange">
+    <van-tabbar-item routeUrl="a" icon="home-o" info="{{ footer.navbar.iconInfo[0] }}">首页</van-tabbar-item>
+    <van-tabbar-item routeUrl="b" icon="shop-o" info="{{ footer.navbar.iconInfo[1] }}">分类</van-tabbar-item>
+    <van-tabbar-item routeUrl="pay" icon="shopping-cart-o" info="{{ footer.navbar.iconInfo[2] }}">
+      订单
+      <!-- <navigator url="pay" open-type="navigatorTo">
+        订单
+      </navigator> -->
+    </van-tabbar-item>
+    <van-tabbar-item routeUrl="userEdit" icon="records" info="{{ footer.navbar.iconInfo[3] }}">反馈</van-tabbar-item>
+  </van-tabbar>
+
+</view>

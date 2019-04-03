@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    fetch test
+    <div>
+            <h1>get</h1>
+        <code>
+                    fetch('http://localhost:3000/api/get?', {
+                        method: 'GET',
+                        mode: "cors",
+                        headers: {
+                            'Accept': 'aplication/json',
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(res => {
+                        return res.text()
+                    }).then(res => {
+                        var s = JSON.parse(res)
+                        this.setState({
+                            content: s
+                        })
+                        console.log('get essays', this.state.content)
+                    })     
+            </code>
+        <br />
+        <br />
+
+    </div>
+    <div>
+            <h1>update</h1>
+
+        <code>
+                var data = JSON.stringify([{name:'aa'},{price:100}])
+                
+                fetch('http://localhost:3000/api/update', {
+                    method: 'POST',
+                    mode: "no-cors",
+                    headers: {
+                        'Accept': 'aplication/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: data
+                }).then(res => {
+                    return res.text()
+                }).then(res => {
+                    console.log('update')
+                })
+        </code>
+
+    </div>
+    <div>
+        <h1>remove</h1>
+        <code>
+            <code>
+                    var data = JSON.stringify({price:100})
+                    
+                    fetch('http://localhost:3000/api/remove', {
+                        method: 'POST',
+                        mode: "no-cors",
+                        headers: {
+                            'Accept': 'aplication/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: data
+                    }).then(res => {
+                        return res.text()
+                    }).then(res => {
+                        console.log('remove')
+                    })
+                </code>
+        </code></div>
+
+
+    <div>
+        <h1>post</h1>
+    
+        <code>
+
+            var data = JSON.stringify({price:100})
+                    
+            fetch('http://localhost:3000/api/post', {
+                method: 'POST',
+                mode: "no-cors",
+                headers: {
+                    'Accept': 'aplication/json',
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            }).then(res => {
+                return res.text()
+            }).then(res => {
+                console.log('remove')
+            })
+
+        </code></div>
+</body>
+
+</html>

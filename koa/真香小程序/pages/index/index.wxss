@@ -1,0 +1,9 @@
+.position_p_b{
+  padding-bottom: 50px;
+}
+.p-y {
+  margin: 4px auto;
+}
+.van-card {
+  position: static !important;
+}

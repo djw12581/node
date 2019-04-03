@@ -1,0 +1,13 @@
+.position_p {
+    padding: 10%;
+}
+textarea {
+    width: 100%;
+    border: 1px solid #f60;
+}
+textarea:active, textarea:hover, textarea:focus{
+    border: 1px solid #07c160;
+}
+.pb1 {
+    margin: 10% auto;
+}
