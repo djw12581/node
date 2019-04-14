@@ -11,9 +11,9 @@
   <view class="position_p_b" hover-class="none" hover-stop-propagation="false">
     <!-- 数据列表部分 -->
     <view wx:for="{{getData}}" wx:key="{{index}}">
-      <van-card custom-class="p-y" num="{{item.num}}" tag="{{item.tag}}" price="{{item.price}}" origin-price="{{item.originPrice||''}}"
-        desc="{{item.desc}}" title="{{item.title}}" thumb="{{ body.dataList.imageURL }}" lazy-load="true"
-        centered="true">
+      <van-card custom-class="p-y" num="{{item.num}}" tag="{{item.tag}}" price="{{item.price}}"
+        origin-price="{{item.originPrice||''}}" desc="{{item.desc}}" title="{{item.title}}" thumb="{{item.imgUrl}}"
+        lazy-load="true" centered="true">
         <view slot="footer">
           <van-icon id="{{index}}" name="add-o" size="2em" bind:click="onAddFood" data-title="{{item.title}}" />
           <van-icon id="{{index}}" name="close" size="2em" bind:click="onDeleteFood" data-title="{{item.title}}" />
@@ -26,16 +26,41 @@
 
 
   <!-- 底部导航 -->
-  <van-tabbar active="{{ footer.navbar.active }}" bind:change="onChange">
+  <!-- <van-tabbar active="{{ footer.navbar.active }}" bind:change="onChange">
     <van-tabbar-item routeUrl="a" icon="home-o" info="{{ footer.navbar.iconInfo[0] }}">首页</van-tabbar-item>
     <van-tabbar-item routeUrl="b" icon="shop-o" info="{{ footer.navbar.iconInfo[1] }}">分类</van-tabbar-item>
     <van-tabbar-item routeUrl="pay" icon="shopping-cart-o" info="{{ footer.navbar.iconInfo[2] }}">
       订单
-      <!-- <navigator url="pay" open-type="navigatorTo">
-        订单
-      </navigator> -->
     </van-tabbar-item>
     <van-tabbar-item routeUrl="userEdit" icon="records" info="{{ footer.navbar.iconInfo[3] }}">反馈</van-tabbar-item>
-  </van-tabbar>
+  </van-tabbar> -->
+  <view class="center bg">
+    <view class="text-center active" hover-class="" hover-stop-propagation="false" bindtap="handleClick" data-index="0">
+      <van-icon name="home-o" info="{{ footer.navbar.iconInfo[0] }}"  size="20px" />
+      <view class="font-size"  hover-stop-propagation="false">
+        首页
+      </view>
+    </view>
+    <view class="text-center" hover-class="active" hover-stop-propagation="false" bindtap="handleClick" data-index="1">
+      <van-icon name="shop-o" info="{{ footer.navbar.iconInfo[1] }}" size="20px" />
+      <view class="font-size"  hover-stop-propagation="false" >
+        分类
+      </view>
+    </view>
+    <view class="text-center" hover-class="active" hover-stop-propagation="false" bindtap="handleClick" data-index="2">
+      <van-icon name="shopping-cart-o" info="{{ footer.navbar.iconInfo[2] }}" size="20px" />
+      <view class="font-size"  hover-stop-propagation="false">
+        订单
+      </view>
+    </view>
+    <view class="text-center" hover-class="active" hover-stop-propagation="false" bindtap="handleClick" data-index="3">
+      <van-icon name="records" info="{{ footer.navbar.iconInfo[3] }}" size="20px" />
+      <view class="font-size"  hover-stop-propagation="false">
+        反馈
+      </view>
+    </view>
+
+
+  </view>
 
 </view>

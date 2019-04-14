@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
     price: { type: Number },
     originPrice: { type: Number },
     tag: { type: String },
-    num: { type: Number }
+    num: { type: Number },
+    imgUrl: { type: String }
 });
 const userLogin = new mongoose.Schema({
     username: { type: String },

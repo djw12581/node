@@ -38,7 +38,7 @@ Page({
   },
   getUserInfo(event) {
     // 根据用户名查询密码字段
-
+    var that = this
     wx.request({
       url: `http://localhost:3000/api/get/userLogin?username=${this.data.username}`, // 仅为示例，并非真实的接口地址
       method: 'GET',
@@ -47,19 +47,24 @@ Page({
         'Content-Type': 'application/json'
       },
       success(res) {
-        console.log('查到的', res.data)
+        console.log('查到的', res.data, that.data.password)
         if (res.data.length > 0) {
-          wx.redirectTo({
-            url: '../index/index',
-            success: (result) => {
+          if (res.data.length == that.data.password) {
+            wx.redirectTo({
+              url: '../index/index',
+              success: (result) => {
 
-            },
-            fail: () => { console.log('')},
-            complete: () => { }
-          })
+              },
+              fail: () => { console.log('') },
+              complete: () => { }
+            })
+          } else {
+            console.log('用户名或密码错误')
+          }
         } else {
           console.log('未找到注册信息，请注册')
         }
+
 
       },
       fail() {

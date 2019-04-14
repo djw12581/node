@@ -2,6 +2,8 @@
 //获取应用实例
 const app = getApp()
 // var userInfo = app.globalData.userInfo;//取得全局变量需要的值
+
+
 Page({
   data: {
     getData: {
@@ -12,15 +14,15 @@ Page({
 
     },
     body: {
-      dataList: {
-        num: 0,
-        tag: '特价',
-        price: 9.9,
-        originPrice: 99 || '',
-        desc: '阿阿斯蒂芬揭发了内容',
-        title: '酸辣面片',
-        imageURL: 'http://lorempixel.com/640/480/business',
-      }
+      // dataList: {
+      //   num: 0,
+      //   tag: '特价',
+      //   price: 9.9,
+      //   originPrice: 99 || '',
+      //   desc: '阿阿斯蒂芬揭发了内容',
+      //   title: '酸辣面片',
+      //   imageURL: 'http://lorempixel.com/640/480/business',
+      // }
     },
     footer: {
       navbar: {
@@ -30,7 +32,7 @@ Page({
     },
     sendData: [], // 拿到全局变量
   },
-  
+
   // 顶部搜索框事件
   onSearch(ev) {
     var that = this
@@ -38,15 +40,22 @@ Page({
     // 从数据库查找匹配的数据，更新列表数据setData（）
   },
   // 底部导航栏事件
+  handleClick(event) {
+    const ev = event.currentTarget.dataset.index
+    console.log('event', event, ev)
+    // 找到点击对象 跳转链接
+    const arr = ['../index/index', '../b/b', '../pay/pay', '../userEdit/userEdit']
+    wx.navigateTo({
+      url: `${arr[ev]}`
+    })
+  },
+
   onChange(event) {
     // 找到点击对象 跳转链接
     const arr = ['../index/index', '../b/b', '../pay/pay', '../userEdit/userEdit']
     wx.navigateTo({
       url: `${arr[event.detail]}`
     })
-
-    // console.log(event.detail);
-
   },
 
   // 商品列表点击事件

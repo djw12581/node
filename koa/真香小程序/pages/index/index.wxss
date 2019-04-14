@@ -7,3 +7,24 @@
 .van-card {
   position: static !important;
 }
+.bg {
+  padding: 0.4em;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+}
+.center {
+  display: flex;
+  justify-content: space-around;
+}
+.text-center {
+  text-align: center
+}
+.font-size {
+  font-size: 12px;
+}
+.active {
+  color: #1989fa;
+}

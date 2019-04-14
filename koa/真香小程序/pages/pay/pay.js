@@ -9,7 +9,7 @@ Page({
         radio: false,
         pay: '',
         price: '',
-        recive: []
+        recive: [],
     },
 
     // 支付按钮点击事件
