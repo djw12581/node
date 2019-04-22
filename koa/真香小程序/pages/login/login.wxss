@@ -1,0 +1,6 @@
+.flex1 {
+    padding: 20px 10px 5px 10px;
+}
+.flex2 {
+    padding: 5px 10px 10px 10px;
+}

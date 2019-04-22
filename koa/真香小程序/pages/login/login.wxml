@@ -1,9 +1,19 @@
 <view class="container ">
-    <van-dialog use-slot async-close show="{{ show }}" show-cancel-button confirm-button-open-type="getUserInfo"
-        confirm-button-text="登录" cancel-button-text="注册" bind:cancel="onClose" bind:getuserinfo="getUserInfo"
-        bind:confirm="userLogin">
-        <van-field value="{{ username }}" label="用户名" placeholder="请输入用户名" bind:change="bindInputText" />
-        <van-field value="{{ password }}" type="password" label="密码" :border="false" placeholder="请输入密码"
+    <van-dialog use-slot async-close show="{{ show }}" transition='none' confirm-button-text="感谢使用真香点餐系统😀">
+        <van-dialog id="van-dialog" />
+        <van-field value="{{ username }}" label="用户名:" placeholder="请输入用户名" bind:change="bindInputText" />
+        <van-dialog id="van-dialog" />
+        <van-field value="{{ password }}" type="password" label="密码:" :border="false" placeholder="请输入密码"
             bind:change="bindInputPwd" />
+        <view class="flex1" hover-class="none" hover-stop-propagation="false">
+            <van-dialog id="van-dialog" />
+            <van-button plain type="info" custom-class="" block='true' bind:click="registor">注册</van-button>
+
+        </view>
+        <view class="flex2" hover-class="none" hover-stop-propagation="false">
+            <van-dialog id="van-dialog" />
+            <van-button type="info" custom-class="" block='true' bind:click="login">登录</van-button>
+        </view>
     </van-dialog>
+
 </view>

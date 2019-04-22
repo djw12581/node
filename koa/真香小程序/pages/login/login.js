@@ -1,23 +1,6 @@
 //获取应用实例
 import Dialog from '../../dist/dialog/dialog';
-
 const app = getApp()
-// Page({
-//   data: {
-//     value: 3,
-//     input: ''
-//   },
-
-//   onload() {
-//     Dialog.alert({
-//       title: '😙感谢参与',
-//       message: '您的宝贵意见将作为我们服务的标准~'
-//     }).then(() => {
-//       // on close
-//       console.log(`...`)
-//     });
-//   }
-// })
 Page({
   data: {
     show: true,
@@ -36,7 +19,7 @@ Page({
     });
     console.log(this.data.password)
   },
-  getUserInfo(event) {
+  login(event) {
     // 根据用户名查询密码字段
     var that = this
     wx.request({
@@ -47,51 +30,69 @@ Page({
         'Content-Type': 'application/json'
       },
       success(res) {
+        // 如果找到信息就跳转，否则弹窗提示注册
+        var s = Dialog
         console.log('查到的', res.data, that.data.password)
         if (res.data.length > 0) {
-          if (res.data.length == that.data.password) {
+          if (res.data[0].password == that.data.password) {
             wx.redirectTo({
               url: '../index/index',
-              success: (result) => {
-
-              },
+              success: (result) => {},
               fail: () => { console.log('') },
               complete: () => { }
             })
           } else {
-            console.log('用户名或密码错误')
+            // 弹窗提示
+            s.confirm({
+              title: '😝记性太差了！',
+              message: '用户名与密码不匹配~'
+            }).then(() => {
+  
+            });
           }
         } else {
+          // 提示框点击跳转注册界面
+          Dialog.confirm({
+            title: '🙃你没注册！',
+            message: '请注册账号~'
+          }).then(() => {
+
+          });
           console.log('未找到注册信息，请注册')
         }
-
-
       },
       fail() {
         console.log('获取验证信息失败')
       }
     })
-
-    // if (true) {
-    //   wx.redirectTo({
-    //     url: '../index/index',
-    //     success: (result) => {
-
-    //     },
-    //     fail: () => { },
-    //     complete: () => { }
-    //   })
-
-    //   console.log(event.detail, this.data.username)
-    // }
-
   },
-  onClose(event) {
+  registor(event) {
+    // 
+    var s = Dialog
+    let {username, password} = this.data
+    console.log('asdfasdf', this.data)
+    wx.request({
+      url: `http://localhost:3000/api/post/users`, // 仅为示例，并非真实的接口地址
+      method: 'POST',
+      header: {
+        'Accept': 'aplication/json',
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      data: {username, password},
+      success(res) {
+        console.log('post data', res.data)
+        s.alert({
+          title: '😘木啊~',
+          message: '恭喜您已注册成功！'
+        }).then(() => {
+         
+        });
+      },
+      fail() {
+        console.log('失败')
+      }
+    })
 
+    
   },
-  userLogin(event) {
-    // wx.navigateTo({
-    //   url: `../index/index`
-    // })
-  }
 });

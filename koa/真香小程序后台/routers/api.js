@@ -66,6 +66,13 @@ router
         // ctx.body = { mgs: "提交成功", start: 200 };
         // 发送数据
     })
+    // 存储用户注册信息
+    .post('/post/users', async ctx => {
+        const r = ctx.request.body
+        console.log('post users', r, typeof(r))
+        const d = await operate.userSave(r).then(d => d)
+        ctx.body = { mgs: "提交成功", start: 200 };
+    })
 
 module.exports = router;
 

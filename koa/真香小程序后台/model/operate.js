@@ -90,4 +90,17 @@ module.exports = {
             })
         })
     },
+    // 存储用户注册信息
+    userSave(data) {
+        return new Promise((resolve, reject) => {
+            userL.create(data, (err, docs) => {
+                if (err) {
+                    rejct(err);
+                } else {
+                    resolve(docs);
+                    // console.log('save', data, docs, typeof(docs))
+                }
+            })
+        })
+    },
 };
