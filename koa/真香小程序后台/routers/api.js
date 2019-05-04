@@ -14,7 +14,6 @@ router
     .get('/get', async ctx => {
         // // Koa2 中 get方法 通过 ctx.query 来获取 xxx?name=123 中name值
         // entity.save(ctx.query);
-        
         // 拿到 find 方法，查到对应数据
         console.log('get', ctx.query)
         const d = await operate.find(ctx.query).then(d => {
@@ -55,7 +54,6 @@ router
     .get('/get/userLogin', async ctx => {
         // // Koa2 中 get方法 通过 ctx.query 来获取 xxx?name=123 中name值
         // entity.save(ctx.query);
-        
         // 拿到 find 方法，查到对应数据
         console.log('get', ctx.query)
         const d = await operate.userFind(ctx.query).then(d => {
