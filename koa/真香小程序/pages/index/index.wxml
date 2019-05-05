@@ -3,7 +3,7 @@
   <!-- 顶部搜索 -->
   <van-search value="{{ header.searchValue }}" placeholder="请输入搜索关键词" bind:search="onSearch" />
   <!-- 宫格上方通告栏 -->
-  <van-notice-bar left-icon="https://img.yzcdn.cn/1.png" text="酸辣面asdfasdfasdfasdfasdfasdfsadfasdf000份！真香！！" />
+  <van-notice-bar left-icon="https://img.yzcdn.cn/1.png" text="酸辣面片已卖出101份！真香！！今日特价菜品已卖出101份 欢迎品尝！" />
   <!-- 中间宫格部分 -->
 
   <!-- 轮播特价食物 -->

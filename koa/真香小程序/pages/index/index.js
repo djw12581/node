@@ -10,19 +10,11 @@ Page({
 
     },
     header: {
-      searchValue: 'a',
+      searchValue: '',
 
     },
     body: {
-      // dataList: {
-      //   num: 0,
-      //   tag: '特价',
-      //   price: 9.9,
-      //   originPrice: 99 || '',
-      //   desc: '阿阿斯蒂芬揭发了内容',
-      //   title: '酸辣面片',
-      //   imageURL: 'http://lorempixel.com/640/480/business',
-      // }
+      imageURL: 'http://localhost:3000/'
     },
     footer: {
       navbar: {
