@@ -56,7 +56,7 @@ app.use(router.routes()).use(router.allowedMethods());
 
 // 将 public 目录设置为静态资源目录
 const static = require('koa-static');
-const main = static(__dirname);
+const main = static(__dirname );
 app.use(main);
 
 const render = require('koa-ejs');
