@@ -23,6 +23,15 @@ Page({
       }
     },
     sendData: [], // 拿到全局变量
+    bnrUrl: [{
+      "url": "http://127.0.0.1:3000/public/img/lb-1.jpg"
+    }, {
+      "url": "http://127.0.0.1:3000/public/img/lb-3.jpg"
+    }, {
+      "url": "http://127.0.0.1:3000/public/img/lb-1.jpg"
+    }, {
+      "url": "http://127.0.0.1:3000/public/img/lb-3.jpg"
+    }]
   },
 
   // 顶部搜索框事件
