@@ -1,5 +1,6 @@
-let {userModel, userL} = require('./essays.js');
+let {userModel, userL, userEdit, userPay} = require('./essays.js');
 module.exports = {
+    // 商品表
     save(data) {
         return new Promise((resolve, reject) => {
             userModel.create(data, (err, docs) => {
@@ -75,8 +76,8 @@ module.exports = {
             })
         })
     },
-
-    // 验证用户登录
+    // 用户表
+      // 验证用户登录
     userFind(data = {}, fields = null, options = {}) {
         return new Promise((resolve, reject) => {
             //model.find(需要查找的对象(如果为空，则查找到所有数据), 属性过滤对象[可选参数], options[可选参数], callback)
@@ -90,10 +91,62 @@ module.exports = {
             })
         })
     },
-    // 存储用户注册信息
+      // 存储用户注册信息
     userSave(data) {
         return new Promise((resolve, reject) => {
             userL.create(data, (err, docs) => {
+                if (err) {
+                    rejct(err);
+                } else {
+                    resolve(docs);
+                    // console.log('save', data, docs, typeof(docs))
+                }
+            })
+        })
+    },
+    // 意见表
+    usereditFind(data = {}, fields = null, options = {}){
+        return new Promise((resolve, reject) => {
+            //model.find(需要查找的对象(如果为空，则查找到所有数据), 属性过滤对象[可选参数], options[可选参数], callback)
+            userEdit.find(data, fields, options, (error, doc) => {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(doc)
+                    // console.log('find', doc, typeof(doc))
+                }
+            })
+        })
+    },
+    usereditSave(data){
+        return new Promise((resolve, reject) => {
+            userEdit.create(data, (err, docs) => {
+                if (err) {
+                    rejct(err);
+                } else {
+                    resolve(docs);
+                    // console.log('save', data, docs, typeof(docs))
+                }
+            })
+        })
+    },
+    // 订单表
+    userpayFind(data = {}, fields = null, options = {}){
+        return new Promise((resolve, reject) => {
+            //model.find(需要查找的对象(如果为空，则查找到所有数据), 属性过滤对象[可选参数], options[可选参数], callback)
+            userPay.find(data, fields, options, (error, doc) => {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve(doc)
+                    // console.log('find', doc, typeof(doc))
+                }
+            })
+        })
+    },
+    userpaySave(data){
+        return new Promise((resolve, reject) => {
+            userPay.create(data, (err, docs) => {
                 if (err) {
                     rejct(err);
                 } else {

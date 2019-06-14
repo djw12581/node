@@ -71,7 +71,20 @@ router
         const d = await operate.userSave(r).then(d => d)
         ctx.body = { mgs: "提交成功", start: 200 };
     })
-
+    // userEdit 存储
+    .post('/post/userEdit', async ctx => {
+        const r = ctx.request.body
+        console.log('post edit', r, typeof(r))
+        const d = await operate.usereditSave(r).then(d => d)
+        ctx.body = { mgs: "提交成功", start: 200 };
+    })
+    // 订单信息存储
+    .post('/post/payData', async ctx => {
+        const r = ctx.request.body
+        console.log('post payData', r, typeof(r))
+        const d = await operate.userpaySave(r).then(d => d)
+        ctx.body = { mgs: "提交成功", start: 200 };
+    })
 module.exports = router;
 
 

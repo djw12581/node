@@ -53,7 +53,6 @@ app.use(koaBody()).use(bodyParser());
 // 加载路由中间件
 app.use(router.routes()).use(router.allowedMethods());
 
-
 // 将 public 目录设置为静态资源目录
 const static = require('koa-static');
 const main = static(__dirname );

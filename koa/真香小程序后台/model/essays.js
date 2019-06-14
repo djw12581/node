@@ -13,9 +13,19 @@ const userLogin = new mongoose.Schema({
     username: { type: String },
     password: { type: String }
 });
+const userData = new mongoose.Schema({
+    commit: { type: String },
+    range: { type: String }
+});
+const payData = new mongoose.Schema({
+    allprice: { type: Number },
+    detail: { type: Object }
+});
 let userModel = db.model('menus', userSchema);
 let userL = db.model('users', userLogin)
-module.exports = {userModel, userL};
+let userEdit = db.model('edits', userData)
+let userPay = db.model('pays', payData)
+module.exports = {userModel, userL, userEdit, userPay};
 // Schema原意为架构
 // 在mongodb中，每一个数据字段都要有固定的数据类型，所以Schema在mongoose中的意思为，每一张数据表对应的字段的数据类型
 

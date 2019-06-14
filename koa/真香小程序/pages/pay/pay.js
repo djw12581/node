@@ -14,7 +14,30 @@ Page({
 
     // 支付按钮点击事件
     onClickButton(ev) {
+         // 调用api /post/payData
+         var d = {
+            allprice: this.data.price/100,
+            detail:[...this.data.recive]
+            // title: this.data.recive[0].title,
+            // price: this.data.recive[0].price,
+            // num: this.data.recive[0].num,
+        }
+        console.log('recive', this.data.recive,d)
+        var reqTask = wx.request({
+            url: 'http://localhost:3000/api/post/payData',
+            data: d,
+            header: {'content-type':'application/json'},
+            method: 'POST',
+            dataType: 'json',
+            responseType: 'text',
+            success: (result)=>{
+                console.log('ok')
+            },
+            fail: ()=>{},
+            complete: ()=>{}
+        });
         console.log('支付', ev)
+
         wx.requestPayment({
             timeStamp: '',
             nonceStr: '',
@@ -24,6 +47,7 @@ Page({
             success(res) { },
             fail(res) { }
         })
+       
     },
     // radio 事件
     onClickRadio(ev) {

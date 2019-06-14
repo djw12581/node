@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>drink</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center a">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+            <label class="form-check-label" for="inlineRadio1">苹果</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+            <label class="form-check-label" for="inlineRadio2">黄瓜</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio3" value="option2">
+            <label class="form-check-label" for="inlineRadio3">西红柿</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio4" value="option2">
+            <label class="form-check-label" for="inlineRadio4">桃子</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="inlineRadioOptions" id="inlineRadio5" value="option2">
+            <label class="form-check-label" for="inlineRadio5">草莓</label>
+        </div>
+        <button id="btn" type="button" class="btn btn-primary">点击显示分数</button>
+        <div id="d">
+            健康评分：<span id="aaa">0</span>
+        </div>
+    </div>
+
+    
+    <script>
+        onload = function(){
+            document.getElementById("aaa").innerText = 0;
+            document.getElementById("btn").onclick = function(){    
+                var ppap = document.getElementsByName("inlineRadioOptions");
+                var num = 0;
+                for(var i=0; i< ppap.length; i++){
+                    if(ppap[i].checked == true) {
+                        num++;
+                    }
+                }
+                // alert(num * 2);
+                document.getElementById("aaa").innerText = num * 2;
+            }
+        }
+        var get = function (selector) {
+            return document.querySelector(selector)
+        }
+       
+        document.querySelector('#aaa').innerHTML = d
+    </script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.s lim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

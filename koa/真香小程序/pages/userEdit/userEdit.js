@@ -16,8 +16,26 @@ Page({
   },
   userInput(event) {
     // 将用户输入合并提交
-    // texarea range 
-
+    // /post/userEdit
+    var d = {
+      commit: this.data.input,
+      range: this.data.value
+    }
+    
+    var reqTask = wx.request({
+      url: 'http://localhost:3000/api/post/userEdit',
+      data: d,
+      header: {'content-type':'application/json'},
+      method: 'POST',
+      dataType: 'json',
+      responseType: 'text',
+      success: (result)=>{
+        console.log('za hui shi')
+      },
+      fail: ()=>{},
+      complete: ()=>{}
+    });
+    
     const { value, input } = this.data
     Dialog.alert({
       title: '😙感谢参与',
